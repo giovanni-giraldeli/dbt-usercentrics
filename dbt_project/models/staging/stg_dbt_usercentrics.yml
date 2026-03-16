@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: stg_customer_profiles_history
+    description: "Staging model for customer profiles history. This model cleans and conforms the customer profile data from the source."
+    columns:
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: customer_country_name
+        description: "The name of the country where the customer is located."
+      - name: customer_plan
+        description: "The customer's subscription plan. Standardized to 'Free Premium' for free plans."
+      - name: customer_payment_type
+        description: "The customer's payment type. Standardized to 'N/A' for free plans."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
+
+  - name: stg_customers_created
+    description: "Staging model for customer creation timestamps. This model records the creation time for each customer."
+    columns:
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: customer_created_ts
+        description: "The timestamp when the customer was created."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
+
+  - name: stg_customers_domain_groups_bridge
+    description: "Staging model for the bridge table between customers and domain groups."
+    columns:
+      - name: domain_group_id
+        description: "The unique identifier for a domain group."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
+
+  - name: stg_domains_history
+    description: "Staging model for domain history. This model captures the history of domains."
+    columns:
+      - name: domain_id
+        description: "The unique identifier for a domain."
+      - name: domain_group_id
+        description: "The unique identifier for a domain group."
+      - name: is_temp_domains
+        description: "A flag to indicate if the domain is temporary."
+      - name: full_subpage_count
+        description: "The number of subpages for the domain."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."

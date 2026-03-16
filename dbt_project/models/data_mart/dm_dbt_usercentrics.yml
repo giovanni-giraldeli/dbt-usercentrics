@@ -1,0 +1,154 @@
+version: 2
+
+models:
+  - name: dim_countries
+    description: "Dimension model for countries. This model contains a list of countries with their ISO codes."
+    columns:
+      - name: country_iso_code_2_digits
+        description: "The 2-digit ISO code for a country."
+      - name: country_iso_code_3_digits
+        description: "The 3-digit ISO code for a country."
+      - name: country_name_official
+        description: "The official name of a country."
+      - name: country_name
+        description: "The common name of a country."
+
+  - name: dim_customers
+    description: "Dimension model for customers. This model represents the current state of a customer with some metrics."
+    columns:
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: customer_id
+        description: "The unique identifier for a- customer."
+      - name: customer_country_name
+        description: "The name of the country where the customer is located."
+      - name: customer_plan
+        description: "The customer's subscription plan."
+      - name: customer_payment_type
+        description: "The customer's payment type."
+      - name: largest_subpage_count
+        description: "The largest number of subpages for a domain associated with the customer."
+      - name: customer_created_dt
+        description: "The date when the customer was created."
+      - name: customer_canceled_dt
+        description: "The date when the customer canceled their subscription."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."
+
+  - name: dim_customers_domain_groups_bridge
+    description: "Dimension model for the bridge table between customers and domain groups."
+    columns:
+      - name: customers_domain_groups_sk
+        description: "The surrogate key for the bridge record."
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: domain_group_sk
+        description: "The surrogate key for a domain group."
+      - name: is_deleted
+        description: "A flag to indicate if the domain group is deleted."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."
+
+  - name: dim_customers_domain_groups_history_bridge
+    description: "Dimension model for the historical bridge table between customers and domain groups."
+    columns:
+      - name: customers_domain_groups_history_sk
+        description: "The surrogate key for the historical bridge record."
+      - name: customer_history_sk
+        description: "The surrogate key for a customer's history record."
+      - name: domain_group_history_sk
+        description: "The surrogate key for a domain group's history record."
+      - name: is_current
+        description: "A flag to indicate if this is the current bridge record."
+      - name: is_deleted
+        description: "A flag to indicate if the domain group is deleted."
+      - name: domain_group_deleted_dt
+        description: "The timestamp when the domain group was deleted."
+      - name: starts_at
+        description: "The timestamp from which the record is valid."
+      - name: ends_at
+        description: "The timestamp until which the record is valid."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."
+
+  - name: dim_customers_history
+    description: "Dimension model for customer history. This model contains the full history of customer profile changes."
+    columns:
+      - name: customer_history_sk
+        description: "The surrogate key for a customer's history record."
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: customer_country_name
+        description: "The name of the country where the customer is located."
+      - name: customer_plan
+        description: "The customer's subscription plan."
+      - name: customer_payment_type
+        description: "The customer's payment type."
+      - name: is_current
+        description: "A flag to indicate if this is the customer's current profile information."
+      - name: is_canceled
+        description: "A flag to indicate if the customer has canceled."
+      - name: customer_created_dt
+        description: "The date when the customer was created."
+      - name: customer_canceled_dt
+        description: "The date when the customer canceled their subscription."
+      - name: starts_at
+        description: "The timestamp from which the record is valid."
+      - name: ends_at
+        description: "The timestamp until which the record is valid."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."
+
+  - name: dim_product_specs
+    description: "Dimension model for product specifications. This model contains information about product specifications."
+    columns:
+      - name: product_specs_sk
+        description: "The surrogate key for a product specification."
+      - name: domain_package_size
+        description: "The package size of the domain (S, M, L)."
+      - name: is_temp_domains
+        description: "A flag to indicate if the domain is temporary."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."
+
+  - name: fact_domains
+    description: "Fact model for domains. This model contains facts about domains."
+    columns:
+      - name: domain_history_sk
+        description: "The surrogate key for a domain's history record."
+      - name: domain_group_history_sk
+        description: "The surrogate key for a domain group's history record."
+      - name: domain_sk
+        description: "The surrogate key for a domain."
+      - name: domain_group_sk
+        description: "The surrogate key for a domain group."
+      - name: product_specs_sk
+        description: "The surrogate key for a product specification."
+      - name: is_current
+        description: "A flag to indicate if this is the current domain record."
+      - name: is_deleted
+        description: "A flag to indicate if the domain is deleted."
+      - name: full_subpage_count
+        description: "The number of subpages for the domain."
+      - name: domain_deleted_dt
+        description: "The timestamp when the domain was deleted."
+      - name: starts_at
+        description: "The timestamp from which the record is valid."
+      - name: ends_at
+        description: "The timestamp until which the record is valid."
+      - name: dw_created_at
+        description: "The timestamp when the record was created in the data warehouse."
+      - name: dw_updated_at
+        description: "The timestamp when the record was last updated in the data warehouse."

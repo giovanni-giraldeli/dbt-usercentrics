@@ -1,0 +1,126 @@
+version: 2
+
+models:
+  - name: int_customers
+    description: "Intermediary model for customers. This model represents the current state of a customer."
+    columns:
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: customer_country_name
+        description: "The name of the country where the customer is located."
+      - name: customer_plan
+        description: "The customer's subscription plan."
+      - name: customer_payment_type
+        description: "The customer's payment type."
+      - name: customer_created_ts
+        description: "The timestamp when the customer was created."
+      - name: customer_canceled_dt
+        description: "The timestamp when the customer canceled their subscription."
+
+  - name: int_customers_history
+    description: "Intermediary model for customer history. This model contains the full history of customer profile changes."
+    columns:
+      - name: customer_history_sk
+        description: "The surrogate key for a customer's history record."
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: customer_country_name
+        description: "The name of the country where the customer is located."
+      - name: customer_plan
+        description: "The customer's subscription plan."
+      - name: customer_payment_type
+        description: "The customer's payment type."
+      - name: is_current
+        description: "A flag to indicate if this is the customer's current profile information."
+      - name: is_canceled
+        description: "A flag to indicate if the customer has canceled."
+      - name: customer_canceled_dt
+        description: "The timestamp when the customer canceled their subscription."
+      - name: customer_created_ts
+        description: "The timestamp when the customer was created."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
+
+  - name: int_customers_domain_groups_bridge
+    description: "Intermediary model for the bridge table between customers and domain groups."
+    columns:
+      - name: customers_domain_groups_sk
+        description: "The surrogate key for the bridge record."
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: domain_group_sk
+        description: "The surrogate key for a domain group."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: domain_group_id
+        description: "The unique identifier for a domain group."
+      - name: is_deleted
+        description: "A flag to indicate if the domain group is deleted."
+      - name: domain_group_deleted_dt
+        description: "The timestamp when the domain group was deleted."
+
+  - name: int_customers_domain_groups_history_bridge
+    description: "Intermediary model for the historical bridge table between customers and domain groups."
+    columns:
+      - name: customers_domain_groups_history_sk
+        description: "The surrogate key for the historical bridge record."
+      - name: customer_history_sk
+        description: "The surrogate key for a customer's history record."
+      - name: domain_group_history_sk
+        description: "The surrogate key for a domain group's history record."
+      - name: customer_sk
+        description: "The surrogate key for a customer."
+      - name: domain_group_sk
+        description: "The surrogate key for a domain group."
+      - name: customer_id
+        description: "The unique identifier for a customer."
+      - name: domain_group_id
+        description: "The unique identifier for a domain group."
+      - name: is_current
+        description: "A flag to indicate if this is the current bridge record."
+      - name: is_deleted
+        description: "A flag to indicate if the domain group is deleted."
+      - name: domain_group_deleted_dt
+        description: "The timestamp when the domain group was deleted."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
+
+  - name: int_domains
+    description: "Intermediary model for domains. This model contains information about domains and their history."
+    columns:
+      - name: domain_history_sk
+        description: "The surrogate key for a domain's history record."
+      - name: domain_group_history_sk
+        description: "The surrogate key for a domain group's history record."
+      - name: domain_sk
+        description: "The surrogate key for a domain."
+      - name: domain_group_sk
+        description: "The surrogate key for a domain group."
+      - name: domain_id
+        description: "The unique identifier for a domain."
+      - name: domain_group_id
+        description: "The unique identifier for a domain group."
+      - name: is_temp_domains
+        description: "A flag to indicate if the domain is temporary."
+      - name: is_current
+        description: "A flag to indicate if this is the current domain record."
+      - name: is_deleted
+        description: "A flag to indicate if the domain is deleted."
+      - name: domain_package_size
+        description: "The package size of the domain (S, M, L)."
+      - name: full_subpage_count
+        description: "The number of subpages for the domain."
+      - name: domain_deleted_dt
+        description: "The timestamp when the domain was deleted."
+      - name: dw_valid_from
+        description: "The timestamp from which the record is valid in the data warehouse."
+      - name: dw_valid_to
+        description: "The timestamp until which the record is valid in the data warehouse."
