@@ -1,0 +1,22 @@
+# Python
+dbt-env/
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+logs/
+
+# dbt
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+dbt_project/dev.duckdb
+
+# duckdb
+*.duckdb
+*.duckdb.wal
+*.duckdb.tmp
