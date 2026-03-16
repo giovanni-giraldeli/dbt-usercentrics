@@ -1,0 +1,10 @@
+sources:
+  - name: aspnet
+    description: Backend raw data from customers information
+    database: dev
+    schema: main
+    tables:
+      - name: aspnet_membership
+        description: Has the date when the customer was created
+      - name: aspnet_profile
+        description: Contains details about the customer

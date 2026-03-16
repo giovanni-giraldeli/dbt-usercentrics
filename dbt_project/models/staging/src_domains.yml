@@ -1,0 +1,10 @@
+sources:
+  - name: domains
+    description: Backend raw data for the domain events
+    database: dev
+    schema: main
+    tables:
+      - name: domain
+        description: Contains the domain events over time
+      - name: domain_group
+        description: Associates each domain group with their respective customer
