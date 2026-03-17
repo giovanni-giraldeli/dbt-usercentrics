@@ -10,12 +10,17 @@ This dbt project transforms OLTP backend data from Usercentrics into a star sche
 
 ## Data Models
 
+### Conceptual Data Model
+The target is to have a Star Schema data model with a SCD Type 1 customer table to reference the current state of the customers, but as well provide historical information to support historical analysis for the company.
+![Star Schema ERD](assets/Star%20Schema%20ERD.png)
+
 The final data model is a star schema composed of the following tables:
 
 ### Dimensions
 
--   **dim_customers**: Contains information about customers.
--   **dim_countries**: Contains a list of countries.
+-   **dim_date**: Contains a list of dates and their relevant date parts.
+-   **dim_countries**: Contains a list of countries with standardized naming convention.
+-   **dim_customers**: Contains the current information about customers.
 -   **dim_product_specs**: Contains information about product specifications.
 -   **dim_customers_history**: Contains the history of customer profile changes.
 -   **dim_customers_domain_groups_bridge**: Bridge table between customers and domain groups.
@@ -24,6 +29,14 @@ The final data model is a star schema composed of the following tables:
 ### Facts
 
 -   **fact_domains**: Contains facts about domains.
+
+### Cubes
+
+-   **cube_customers_snapshots_last_24m**: Contains relevant information about customers and their usage for the last 24 months.
+
+### Semantic Layer
+
+-   **snapshot_metrics_last_24m**: Contains relevant metrics pre-calculated for each month in the last 24 months.
 
 ## Running the project
 
