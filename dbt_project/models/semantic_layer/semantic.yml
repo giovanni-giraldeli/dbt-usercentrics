@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: snapshot_metrics_last_24m
+    description: "Monthly metrics from the last 24 months for customers and domains."
+    columns:
+      - name: snapshot_dt
+        description: "The surrogate key for the snapshot, which is the month of reference."
+      - name: unique_customers_count
+        description: "The count of unique customers."
+      - name: unique_domains_count
+        description: "The count of unique domains, excluding temporary domains."
+      - name: unique_domains_s_package_count
+        description: "The count of unique domains classified as S package size, excluding temporary domains."
+      - name: unique_domains_m_package_count
+        description: "The count of unique domains classified as M package size, excluding temporary domains."
+      - name: unique_domains_l_package_count
+        description: "The count of unique domains classified as L package size, excluding temporary domains."
