@@ -28,6 +28,7 @@ WITH last_date_calc AS (
 , customer_snapshot AS (
 	SELECT
 	    dch.customer_history_sk,
+	    dch.customer_sk,
 	    dps.domain_package_size,
 	    dps.is_temp_domains,
 	    dch.customer_country_name,
@@ -53,6 +54,7 @@ WITH last_date_calc AS (
 			ON dps.product_specs_sk = fd.product_specs_sk
 	GROUP BY
 	    dch.customer_history_sk,
+	    dch.customer_sk,
 	    dps.domain_package_size,
 	    dps.is_temp_domains,
 	    dch.customer_country_name,
@@ -62,13 +64,16 @@ WITH last_date_calc AS (
 )
 SELECT
 	ROW_NUMBER() OVER (ORDER BY snapshot_dt, customer_history_sk) AS snapshot_sk,
-    customer_history_sk,
-    domain_package_size,
-    is_temp_domains,
-    customer_country_name,
-    customer_plan,
-    customer_payment_type,
-    full_subpage_total_count,
-    snapshot_dt
+	-- Some domain groups weren't identified and, therefore, customers weren't identified as well
+	COALESCE(customer_history_sk, -1) AS customer_history_sk,
+	COALESCE(customer_sk, -1) AS customer_sk,
+	domain_package_size,
+	is_temp_domains,
+	COALESCE(customer_country_name, 'Unknown') AS customer_country_name,
+	COALESCE(customer_plan, 'Unknown') AS customer_plan,
+	COALESCE(customer_payment_type, 'Unknown') AS customer_payment_type,
+	unique_domains_count,
+	full_subpage_total_count,
+	snapshot_dt
 FROM
 	customer_snapshot
