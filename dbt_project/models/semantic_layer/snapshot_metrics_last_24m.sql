@@ -30,6 +30,6 @@ SELECT
 		END
 	) AS unique_domains_l_package_count
 FROM
-	case_giovanni.cube_customers_snapshots_last_24m
+	{{ ref('cube_customers_snapshots_last_24m') }}
 GROUP BY
 	snapshot_dt
