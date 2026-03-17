@@ -10,7 +10,7 @@ This dbt project transforms OLTP backend data from Usercentrics into a star sche
 
 ## Data Models
 
-### Conceptual Data Model
+### Logical Data Model
 The target is to have a Star Schema data model with a SCD Type 1 customer table to reference the current state of the customers, but as well provide historical information to support historical analysis for the company.
 ![Star Schema ERD](assets/Star%20Schema%20ERD.png)
 
