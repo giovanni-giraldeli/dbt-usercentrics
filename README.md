@@ -1,6 +1,6 @@
 # dbt-usercentrics
 
-This dbt project transforms OLTP backend data from Usercentrics into a star schema data model for OLAP analytics. The project is structured into three layers: staging, intermediary, and data mart.
+This DuckDB dbt project transforms OLTP backend data from Usercentrics into a star schema data model for OLAP analytics. The project is structured into three layers: staging, intermediary, and data mart.
 
 ## Project Structure
 
@@ -75,12 +75,14 @@ After the exploratory data analysis, the physical data model was executed by cre
 
 ## Running the project
 
-To run this project, you will need to have dbt installed and configured. You can find more information about how to do that in the [dbt documentation](https://docs.getdbt.com/docs/introduction).
+To run this project, you will need to have dbt Core installed and configured with the DuckDB adapter, with a local database containing the data source. You can find more information about how to install dbt Core and the DuckDB adapter in the [dbt documentation](https://docs.getdbt.com/docs/introduction).
 
 Once you have dbt configured, you can run the project using the following command:
 
 ```bash
 dbt run
+dbt docs generate
+dbt docs serve
 ```
 
 This will run all the models in the project and create the final data mart tables in your data warehouse.
