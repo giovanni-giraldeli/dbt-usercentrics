@@ -75,14 +75,37 @@ After the exploratory data analysis, the physical data model was executed by cre
 
 ## Running the project
 
-To run this project, you will need to have dbt Core installed and configured with the DuckDB adapter, with a local database containing the data source. You can find more information about how to install dbt Core and the DuckDB adapter in the [dbt documentation](https://docs.getdbt.com/docs/introduction).
+To run this project, you will need Python installed on your machine.
 
-Once you have dbt configured, you can run the project using the following command:
+1.  **Clone the repository and navigate to the project directory.**
 
-```bash
-dbt run
-dbt docs generate
-dbt docs serve
-```
+2.  **Create and activate a virtual environment:**
+    ```bash
+    # Create the virtual environment
+    python -m venv dbt-env
+
+    # Activate on Windows
+    dbt-env\Scripts\activate
+
+    # Activate on macOS/Linux
+    source dbt-env/bin/activate
+    ```
+
+3.  **Install dependencies:**
+    All project dependencies, including dbt Core and the necessary adapters, are listed in the `requirements.txt` file. Install them using pip:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Configure your dbt profile:**
+    You will need a `profiles.yml` file to configure the connection to your data source. For guidance on setting this up, please refer to the official [dbt documentation](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml).
+
+5.  **Run the dbt commands:**
+    Once your environment is set up and your profile is configured, you can run the project:
+    ```bash
+    dbt run
+    dbt docs generate
+    dbt docs serve
+    ```
 
 This will run all the models in the project and create the final data mart tables in your data warehouse.
